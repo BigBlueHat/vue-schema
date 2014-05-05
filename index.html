@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>vue-schema</title>
+  <style type="text/css">
+    html, body, #editor {
+        margin: 0;
+        height: 100%;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        color: #333;
+    }
+    small { color:#999 }
+
+    #input, #output {
+        display: inline-block;
+        width: 49%;
+        height: 100%;
+        vertical-align: top;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+
+    #output {
+        border: none;
+        border-left: 1px solid #ccc;
+        resize: none;
+        outline: none;
+        background-color: #f6f6f6;
+        font-size: 14px;
+        font-family: 'Monaco', courier, monospace;
+        padding: 20px;
+    }
+
+    code {
+        color: #f66;
+    }
+  </style>
+</head>
+<body>
+  <div id="editor">
+      <div id="input">
+          <h1>{{schema.title}}</h1>
+          <div v-repeat="schema.properties">
+              <label for="{{$key}}">{{$key}}</label>
+              <input name="{{$key}}" v-model="value" type="{{type | input_type}}" />
+              <div v-if="description"><small>{{description}}</small></div>
+          </div>
+      </div>
+      <textarea id="output" v-model="output"></textarea>
+  </div>
+
+  <script src="vue.min.js"></script>
+  <script type="text/javascript">
+    var schema = {
+      "title": "Example Schema",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "age": {
+          "description": "Age in years",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["firstName", "lastName"]
+    };
+
+    var app = new Vue({
+      el: '#editor',
+      data: {
+        schema: schema
+      },
+      computed: {
+        output: {
+          $get: function() {
+            var self = this;
+            var rv = {};
+            var keys = Object.keys(self.schema.properties);
+            keys.forEach(function(key) {
+              rv[key] = self.schema.properties[key].value;
+            });
+            return JSON.stringify(rv, null, "\t");
+          }
+        }
+      },
+      filters: {
+        input_type: function(value) {
+          var types = {
+              string: 'text',
+              integer: 'number'
+          }
+          return types[value];
+        }
+      }
+    });
+  </script>
+</body>
+</html>
