@@ -22,6 +22,16 @@ var app = new Vue({
   data: {
     schema: schema
   },
+  created: function () {
+    this.$el.getElementsByClassName('schema')[0].value
+      = JSON.stringify(this.schema, null, "\t");
+  },
+  methods: {
+    updateSchema: function(e) {
+      console.log(e.target.value);
+      e.targetVM.schema = JSON.parse(e.target.value);
+    }
+  },
   computed: {
     output: {
       $get: function() {
@@ -36,6 +46,9 @@ var app = new Vue({
     }
   },
   filters: {
+    pretty: function(value) {
+      return JSON.stringify(value, null, "\t");
+    },
     input_type: function(value) {
       var types = {
           string: 'text',

@@ -6,6 +6,7 @@
 </head>
 <body>
   <div id="editor">
+    <div id="left-side">
       <div id="input">
           <h1>{{schema.title}}</h1>
           <div v-repeat="schema.properties">
@@ -14,7 +15,10 @@
               <div v-if="description"><small>{{description}}</small></div>
           </div>
       </div>
-      <textarea id="output" v-model="output"></textarea>
+      <textarea id="schema" class="schema" v-on="change: updateSchema">
+      </textarea>
+    </div>
+    <textarea id="output" v-model="output"></textarea>
   </div>
 
   <script src="vue.min.js"></script>
