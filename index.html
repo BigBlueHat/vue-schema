@@ -16,11 +16,7 @@
             <br /><small>Or paste one in the textarea below.</small></div>
           <h1 v-if="schema.title">{{schema.title}}</h1>
           <div v-if="schema.description"><small>{{schema.description}}</small></div>
-          <div v-repeat="schema.properties">
-              <label for="{{$key}}">{{$key}}</label>
-              <input name="{{$key}}" v-model="value" type="{{type | input_type}}" />
-              <div v-if="description"><small>{{description}}</small></div>
-          </div>
+          <div v-repeat="schema.properties" v-component="json-schema-property"></div>
       </div>
       <textarea id="schema"
         v-component="json-textarea"
@@ -29,6 +25,13 @@
     </div>
     <textarea id="output" v-model="output"></textarea>
   </div>
+
+  <!-- templates -->
+  <script id="json-schema-property" type="text/vue-template+html">
+    <label for="{{$key}}">{{$key}}</label>
+    <input name="{{$key}}" v-model="value" type="{{type | input_type}}" />
+    <div v-if="description"><small>{{description}}</small></div>
+  </script>
 
   <script src="vue.min.js"></script>
   <script src="app.js"></script>

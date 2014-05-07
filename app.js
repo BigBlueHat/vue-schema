@@ -41,6 +41,10 @@ Vue.component('schema-links', {
   }
 });
 
+Vue.component('json-schema-property', {
+  template: '#json-schema-property'
+});
+
 var app = new Vue({
   el: '#editor',
   data: {
