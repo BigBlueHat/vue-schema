@@ -14,7 +14,8 @@
       <div id="input">
         <div v-if="!schema.properties"><em>Pick a schema. Any schema!</em>
             <br /><small>Or paste one in the textarea below.</small></div>
-          <h1>{{schema.title}}</h1>
+          <h1 v-if="schema.title">{{schema.title}}</h1>
+          <div v-if="schema.description"><small>{{schema.description}}</small></div>
           <div v-repeat="schema.properties">
               <label for="{{$key}}">{{$key}}</label>
               <input name="{{$key}}" v-model="value" type="{{type | input_type}}" />
