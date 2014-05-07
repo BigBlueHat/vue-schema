@@ -7,6 +7,10 @@
 <body>
   <div id="editor">
     <div id="left-side">
+      <ul class="schema-links" v-component="schema-links">
+        <li v-repeat="links"><a href="{{$value}}"
+          v-on="click: setHref">{{$key}}</a></li>
+      </ul>
       <div id="input">
           <h1>{{schema.title}}</h1>
           <div v-repeat="schema.properties">

@@ -42,3 +42,19 @@ small { color:#999 }
 code {
     color: #f66;
 }
+
+.schema-links {
+    padding:0 20px;
+}
+.schema-links li {
+    display: inline;
+    list-style: none;
+    border-right: 1px solid #999;
+    padding: 0 0.5em;
+}
+.schema-links li:first-child {
+    padding-left: 0;
+}
+.schema-links li:last-child {
+    border: none;
+}
