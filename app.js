@@ -17,20 +17,24 @@ var schema = {
   "required": ["firstName", "lastName"]
 };
 
+Vue.component('json-textarea', {
+  template: '{{content}}',
+  created: function() {
+    this.$watch('content', function () {
+      this.$el.value = JSON.stringify(this.content, null, 2);
+    });
+  },
+  methods: {
+    updateSchema: function(e) {
+      e.targetVM.content = JSON.parse(e.target.value);
+    }
+  }
+});
+
 var app = new Vue({
   el: '#editor',
   data: {
     schema: schema
-  },
-  created: function () {
-    this.$el.getElementsByClassName('schema')[0].value
-      = JSON.stringify(this.schema, null, "\t");
-  },
-  methods: {
-    updateSchema: function(e) {
-      console.log(e.target.value);
-      e.targetVM.schema = JSON.parse(e.target.value);
-    }
   },
   computed: {
     output: {
@@ -46,9 +50,6 @@ var app = new Vue({
     }
   },
   filters: {
-    pretty: function(value) {
-      return JSON.stringify(value, null, "\t");
-    },
     input_type: function(value) {
       var types = {
           string: 'text',

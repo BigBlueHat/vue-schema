@@ -15,8 +15,10 @@
               <div v-if="description"><small>{{description}}</small></div>
           </div>
       </div>
-      <textarea id="schema" class="schema" v-on="change: updateSchema">
-      </textarea>
+      <textarea id="schema"
+        v-component="json-textarea"
+        v-with="content: schema"
+        v-on="change: updateSchema"></textarea>
     </div>
     <textarea id="output" v-model="output"></textarea>
   </div>
