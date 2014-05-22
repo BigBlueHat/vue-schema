@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>vue-schema</title>
+  <link rel="stylesheet" href="pure-min.css" />
   <link rel="stylesheet" href="app.css" />
 </head>
 <body>
@@ -14,9 +15,11 @@
       <div id="input">
         <div v-if="!schema.properties"><em>Pick a schema. Any schema!</em>
             <br /><small>Or paste one in the textarea below.</small></div>
-          <h1 v-if="schema.title">{{schema.title}}</h1>
-          <div v-if="schema.description"><small>{{schema.description}}</small></div>
-          <div v-repeat="schema.properties" v-component="json-schema-property"></div>
+          <form class="pure-form pure-form-aligned">
+            <h1 v-if="schema.title">{{schema.title}}</h1>
+            <div v-if="schema.description"><small>{{schema.description}}</small></div>
+            <div v-repeat="schema.properties" v-component="json-schema-property"></div>
+          </form>
       </div>
       <textarea id="schema"
         v-component="json-textarea"
@@ -28,9 +31,11 @@
 
   <!-- templates -->
   <script id="json-schema-property" type="text/vue-template+html">
-    <label for="{{$key}}">{{$key}}</label>
-    <input name="{{$key}}" v-model="value" type="{{type | input_type}}" />
-    <div v-if="description"><small>{{description}}</small></div>
+    <div class="pure-control-group">
+      <label for="{{$key}}">{{$key}}</label>
+      <input name="{{$key}}" v-model="value" type="{{type | input_type}}" />
+      <p class="pure-help-inline" v-if="description"><small>{{description}}</small></p>
+    </div>
   </script>
 
   <script src="vue.min.js"></script>
