@@ -31,11 +31,15 @@
 
   <!-- templates -->
   <script id="json-schema-property" type="text/vue-template+html">
-    <div class="pure-control-group">
+    <div v-if="type != 'object'" class="pure-control-group">
       <label for="{{$key}}">{{$key}}</label>
       <input name="{{$key}}" v-model="doc.{{$key}}" type="{{type | input_type}}" />
       <p class="pure-help-inline" v-if="description"><small>{{description}}</small></p>
     </div>
+    <fieldset class="pure-control-group" v-if="type == 'object'">
+      <legend>{{$key}}</legend>
+      <div v-component="json-schema-property" v-repeat="{{value}}.properties"></div>
+    </fieldset>
   </script>
 
   <script src="vue.min.js"></script>
