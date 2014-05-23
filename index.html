@@ -18,7 +18,7 @@
           <form class="pure-form pure-form-aligned">
             <h1 v-if="schema.title">{{schema.title}}</h1>
             <div v-if="schema.description"><small>{{schema.description}}</small></div>
-            <div v-repeat="schema.properties" v-component="json-schema-property"></div>
+            <div v-repeat="schema.properties" v-component="json-schema-property" v-with="doc: doc"></div>
           </form>
       </div>
       <textarea id="schema"
@@ -33,7 +33,7 @@
   <script id="json-schema-property" type="text/vue-template+html">
     <div class="pure-control-group">
       <label for="{{$key}}">{{$key}}</label>
-      <input name="{{$key}}" v-model="value" type="{{type | input_type}}" />
+      <input name="{{$key}}" v-model="doc.{{$key}}" type="{{type | input_type}}" />
       <p class="pure-help-inline" v-if="description"><small>{{description}}</small></p>
     </div>
   </script>

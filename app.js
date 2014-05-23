@@ -48,23 +48,13 @@ Vue.component('json-schema-property', {
 var app = new Vue({
   el: '#editor',
   data: {
-    schema: {}
+    schema: {},
+    doc: {}
   },
   computed: {
     output: {
       $get: function() {
-        var self = this;
-        var rv = {};
-        var keys = {};
-        if (self.schema && self.schema.properties) {
-          keys = Object.keys(self.schema.properties);
-          keys.forEach(function(key) {
-            rv[key] = self.schema.properties[key].value;
-          });
-          return JSON.stringify(rv, null, "\t");
-        } else {
-          return {};
-        }
+        return JSON.stringify(this.doc, null, "\t");
       }
     }
   },
