@@ -38,7 +38,7 @@
     </div>
     <fieldset class="pure-control-group" v-if="type == 'object'">
       <legend>{{$key}}</legend>
-      <div v-component="json-schema-property" v-repeat="{{value}}.properties"></div>
+      <div v-component="json-schema-property" v-repeat="properties"></div>
     </fieldset>
   </script>
 
