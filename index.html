@@ -12,7 +12,7 @@
         <li v-repeat="links"><a href="{{$value}}"
           v-on="click: setHref">{{$key}}</a></li>
       </ul>
-      <div id="input">
+      <div id="input" v-component="vue-schema" v-with="schema: schema, doc: doc">
         <div v-if="!schema.properties"><em>Pick a schema. Any schema!</em>
             <br /><small>Or paste one in the textarea below.</small></div>
           <form class="pure-form pure-form-aligned">

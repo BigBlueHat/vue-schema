@@ -34,9 +34,22 @@ Vue.component('schema-links', {
           self = this;
       xhr.open('GET', e.target.getAttribute('href'));
       xhr.onload = function () {
+        self.$parent.doc = {};
         self.$parent.schema = JSON.parse(xhr.responseText);
       }
       xhr.send()
+    }
+  }
+});
+
+Vue.component('vue-schema', {
+  filters: {
+    input_type: function(value) {
+      var types = {
+          string: 'text',
+          integer: 'number'
+      }
+      return types[value];
     }
   }
 });
@@ -56,15 +69,6 @@ var app = new Vue({
       $get: function() {
         return JSON.stringify(this.doc, null, "\t");
       }
-    }
-  },
-  filters: {
-    input_type: function(value) {
-      var types = {
-          string: 'text',
-          integer: 'number'
-      }
-      return types[value];
     }
   }
 });
