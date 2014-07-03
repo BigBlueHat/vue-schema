@@ -75,6 +75,7 @@ var app = new Vue({
             var legend = dom[i].querySelector('legend').textContent;
             var sub_dom = dom[i].querySelectorAll('[data-json]');
             obj[legend] = accumulate({}, sub_dom);
+            i += sub_dom.length;
           }
         }
         return obj;
