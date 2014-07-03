@@ -12,7 +12,7 @@
         <li v-repeat="links"><a href="{{$value}}"
           v-on="click: setHref">{{$key}}</a></li>
       </ul>
-      <div id="input" v-component="vue-schema" v-with="schema: schema, doc: doc">
+      <div id="input" v-component="vue-schema" v-with="schema: schema">
         <div v-if="!schema.properties"><em>Pick a schema. Any schema!</em>
             <br /><small>Or paste one in the textarea below.</small></div>
           <form class="pure-form pure-form-aligned">
@@ -26,17 +26,17 @@
         v-with="content: schema"
         v-on="change: updateSchema"></textarea>
     </div>
-    <textarea id="output" v-model="output"></textarea>
+    <textarea id="output" v-on="click: output()">...click in here to update the output...</textarea>
   </div>
 
   <!-- templates -->
   <script id="json-schema-property" type="text/vue-template+html">
-    <div v-if="type != 'object'" class="pure-control-group">
+    <div data-json="kvp" v-if="type != 'object'" class="pure-control-group">
       <label for="{{$key}}">{{$key}}</label>
-      <input name="{{$key}}" v-model="doc.{{$key}}" type="{{type | input_type}}" />
+      <input name="{{$key}}" type="{{type | input_type}}" />
       <p class="pure-help-inline" v-if="description"><small>{{description}}</small></p>
     </div>
-    <fieldset class="pure-control-group" v-if="type == 'object' && $key != '$ref'">
+    <fieldset data-json="object" class="pure-control-group" v-if="type == 'object' && $key != '$ref'">
       <legend>{{$key}}</legend>
       <div v-component="json-schema-property" v-repeat="properties"></div>
     </fieldset>
