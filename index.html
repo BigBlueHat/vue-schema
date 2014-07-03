@@ -36,7 +36,7 @@
       <input name="{{$key}}" v-model="doc.{{$key}}" type="{{type | input_type}}" />
       <p class="pure-help-inline" v-if="description"><small>{{description}}</small></p>
     </div>
-    <fieldset class="pure-control-group" v-if="type == 'object'">
+    <fieldset class="pure-control-group" v-if="type == 'object' && $key != '$ref'">
       <legend>{{$key}}</legend>
       <div v-component="json-schema-property" v-repeat="properties"></div>
     </fieldset>
