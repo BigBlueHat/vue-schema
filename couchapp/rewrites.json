@@ -1,0 +1,17 @@
+[
+  {
+    "from": "schemas",
+    "to": "_view/schemas",
+    "query": {
+      "reduce": "false"
+    }
+  },
+  {
+    "from": "/",
+    "to": "index.html"
+  },
+  {
+    "from": "*",
+    "to": "../../*"
+  }
+]
